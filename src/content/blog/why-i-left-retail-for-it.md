@@ -3,6 +3,7 @@ title: 'Why I Left Retail Behind to Chase a Career in IT'
 description: 'After years in retail management, I left to retrain for a career in IT — a passion I''ve had since I was a kid, and why I''m studying it properly with the Open University.'
 pubDate: 'Aug 22 2026'
 tags: ['Career Change', 'IT', 'Open University']
+heroImage: '../../assets/why-i-left-retail-hero.png'
 ---
 
 ## The Decision
