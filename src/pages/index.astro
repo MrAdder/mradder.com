@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 4);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.intro {
+				padding: 2em 0 3em 0;
+				border-bottom: 1px solid rgb(var(--border));
+				margin-bottom: 2em;
+			}
+			.prompt {
+				font-family: var(--font-mono);
+				color: var(--accent);
+				margin: 0 0 0.75em 0;
+				font-size: 0.95em;
+			}
+			.prompt::after {
+				content: '▌';
+				margin-left: 0.3em;
+				animation: blink 1.1s steps(1) infinite;
+			}
+			@keyframes blink {
+				50% {
+					opacity: 0;
+				}
+			}
+			.intro h1 {
+				margin-bottom: 0.4em;
+			}
+			.tagline {
+				color: rgb(var(--fg-muted));
+				max-width: 46em;
+				margin-bottom: 0;
+			}
+			.empty {
+				font-family: var(--font-mono);
+				color: rgb(var(--fg-muted));
+				font-size: 0.9em;
+			}
+			.latest-header {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				margin-bottom: 1em;
+			}
+			.latest-header h2 {
+				margin: 0;
+			}
+			.latest-header a {
+				font-family: var(--font-mono);
+				font-size: 0.9em;
+				text-decoration: none;
+			}
+			.latest-header a:hover {
+				text-decoration: underline;
+			}
+			ul.posts {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul.posts li {
+				border-bottom: 1px solid rgb(var(--border));
+			}
+			ul.posts li:last-child {
+				border-bottom: none;
+			}
+			ul.posts a {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 1em;
+				padding: 0.9em 0;
+				text-decoration: none;
+				color: rgb(var(--fg));
+			}
+			ul.posts a:hover .post-title {
+				color: var(--accent);
+			}
+			.post-title {
+				transition: color 0.15s ease;
+			}
+			ul.posts time {
+				flex-shrink: 0;
+				font-family: var(--font-mono);
+				font-size: 0.85em;
+				color: rgb(var(--fg-muted));
+			}
+			@media (max-width: 600px) {
+				ul.posts a {
+					flex-direction: column;
+					gap: 0.2em;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<p class="prompt">mradder@web:~$ whoami</p>
+				<h1>Daniel Green</h1>
+				<p class="tagline">
+					Notes on homelabs, Linux and Windows administration, networking, and the tools I use day
+					to day — written while I work toward a BSc in Computing &amp; IT, plus thoughts on why
+					I'm making the career change into IT.
+				</p>
+			</section>
+			<section class="latest">
+				<div class="latest-header">
+					<h2>Latest posts</h2>
+					<a href="/blog">View all →</a>
+				</div>
+				{
+					posts.length > 0 ? (
+						<ul class="posts">
+							{posts.map((post) => (
+								<li>
+									<a href={`/blog/${post.id}/`}>
+										<span class="post-title">{post.data.title}</span>
+										<FormattedDate date={post.data.pubDate} />
+									</a>
+								</li>
+							))}
+						</ul>
+					) : (
+						<p class="empty">Nothing published yet — first post coming soon.</p>
+					)
+				}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

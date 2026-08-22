@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'] & {
+	readingTime: number;
+	toc: MarkdownHeading[];
+};
+
+const { title, description, pubDate, updatedDate, heroImage, tags, readingTime, toc } =
+	Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: 100%;
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 3em 1em;
+			}
+			.post-grid {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 2.5em;
+			}
+			@media (min-width: 960px) {
+				.post-grid {
+					grid-template-columns: 220px minmax(0, 720px);
+					justify-content: center;
+					align-items: start;
+				}
+			}
+			.toc-sidebar {
+				position: sticky;
+				top: 2em;
+				font-family: var(--font-mono);
+			}
+			.toc-label {
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: var(--accent);
+				font-size: 0.8em;
+				margin: 0 0 0.75em 0;
+			}
+			.toc-sidebar ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				border-left: 2px solid rgb(var(--border));
+			}
+			.toc-sidebar li {
+				margin: 0;
+			}
+			.toc-sidebar a {
+				display: block;
+				padding: 0.35em 0 0.35em 0.9em;
+				margin-left: -2px;
+				border-left: 2px solid transparent;
+				color: rgb(var(--fg-muted));
+				text-decoration: none;
+				font-size: 0.85em;
+			}
+			.toc-sidebar li[data-depth='3'] a {
+				padding-left: 1.7em;
+				font-size: 0.8em;
+			}
+			.toc-sidebar a:hover {
+				color: var(--accent);
+				border-left-color: var(--accent);
+			}
+			@media (max-width: 959px) {
+				.toc-sidebar {
+					display: none;
+				}
+			}
+			article {
+				width: 100%;
+				max-width: 720px;
+				margin: 0 auto;
+			}
+			@media (min-width: 960px) {
+				article {
+					margin: 0;
+				}
+			}
+			.hero-image {
+				width: 100%;
+				margin-bottom: 1.5em;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				color: rgb(var(--fg));
+			}
+			.title {
+				margin-bottom: 1.5em;
+			}
+			.title h1 {
+				margin: 0 0 0.6em 0;
+			}
+			.meta {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0.6em;
+				color: rgb(var(--fg-muted));
+				font-family: var(--font-mono);
+				font-size: 0.85em;
+			}
+			.meta .sep {
+				opacity: 0.5;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em;
+				list-style: none;
+				margin: 1em 0 0 0;
+				padding: 0;
+			}
+			.tags li {
+				font-family: var(--font-mono);
+				font-size: 0.8em;
+				background: rgb(var(--bg-inset));
+				border: 1px solid rgb(var(--border));
+				border-radius: 4px;
+				padding: 0.25em 0.6em;
+				color: var(--accent);
+			}
+			.title hr {
+				margin-top: 1.5em;
+			}
+			.prose :global(h2),
+			.prose :global(h3) {
+				scroll-margin-top: 1.5em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<div class="post-grid">
+				{
+					toc.length > 1 && (
+						<aside class="toc-sidebar">
+							<p class="toc-label">On this page</p>
+							<nav aria-label="Table of contents">
+								<ul>
+									{toc.map((heading) => (
+										<li data-depth={heading.depth}>
+											<a href={`#${heading.slug}`}>{heading.text}</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						</aside>
+					)
+				}
+				<article>
+					<div class="prose">
+						<div class="title">
+							<h1>{title}</h1>
+							<div class="meta">
+								<FormattedDate date={pubDate} />
+								<span class="sep">·</span>
+								<span>{readingTime} min read</span>
+								{
+									updatedDate && (
+										<>
+											<span class="sep">·</span>
+											<span class="last-updated-on">
+												updated <FormattedDate date={updatedDate} />
+											</span>
+										</>
+									)
+								}
+							</div>
+							{
+								tags && tags.length > 0 && (
+									<ul class="tags">
+										{tags.map((tag) => (
+											<li>{tag}</li>
+										))}
+									</ul>
+								)
+							}
+							<hr />
+						</div>
+						<div class="hero-image">
+							{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+						</div>
+						<slot />
+					</div>
+				</article>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

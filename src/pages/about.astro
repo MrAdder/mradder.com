@@ -1,0 +1,272 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const skills = [
+	{
+		label: 'Technical Skills',
+		items: ['Windows', 'Linux', 'Active Directory', 'Microsoft Office 365', 'Networking / IP addressing'],
+	},
+	{
+		label: 'IT Support & Systems',
+		items: ['Ticketing systems', 'Incident handling', 'Hardware & software troubleshooting', 'End-user support'],
+	},
+	{
+		label: 'Professional Skills',
+		items: ['Customer service', 'Clear communication', 'Teamwork', 'Structured problem solving'],
+	},
+];
+
+const projects = [
+	{
+		title: 'Home Lab Environment (Windows & Linux)',
+		description:
+			'Designed, deployed, and maintained virtualized environments using virtual machines and LXC containers. Performed system configuration, user management, troubleshooting, and recovery testing, documenting changes for repeatability.',
+	},
+	{
+		title: 'Networking & Infrastructure',
+		description:
+			'Implemented and managed a UniFi-based home network. Configured network devices, monitored connectivity and performance, and diagnosed hardware and network-related issues using core networking principles.',
+	},
+	{
+		title: 'Software Development & Automation',
+		description:
+			'Developed custom Discord bots using Node.js, implementing event-driven logic, command handling, and integrations. Researched and implemented solutions using official documentation and community resources.',
+	},
+];
+
+const experience = [
+	{
+		role: 'Shift Leader',
+		org: 'Tesco',
+		dates: 'April 2021 – December 2025',
+		description:
+			'First point of contact for operational issues during assigned shifts, diagnosing problems and coordinating resolutions under time pressure. Provided frontline support to colleagues, responded to system and process queries, followed escalation procedures, and used internal tools for reporting, compliance, and audit requirements.',
+	},
+	{
+		role: 'Supervisor',
+		org: "McColl's Retail Group",
+		dates: 'August 2018 – November 2020',
+		description:
+			'Supported daily store operations by resolving system-related and customer issues, onboarding and training new colleagues, and ensuring consistent adherence to procedures, security standards, and data handling requirements.',
+	},
+	{
+		role: 'Paid Global Administrator',
+		org: 'Twitch',
+		dates: 'September 2013 – January 2015',
+		description:
+			'Moderated large global online communities using administrative and automation tools. Investigated incidents, enforced platform policies, documented actions for traceability, and handled escalations across multiple regions and time zones.',
+	},
+	{
+		role: 'Technical Support and Administrator',
+		org: 'FPS Gaming Solutions',
+		dates: 'January 2009 – June 2011',
+		description:
+			'Provided technical support across hardware, software, and network environments. Responded to support tickets, troubleshot faults, maintained system records, prepared usage reports, and escalated issues where appropriate.',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About — ${SITE_TITLE}`} description="Daniel Green — Aspiring IT Professional, CV and background." />
+		<style>
+			.prompt {
+				font-family: var(--font-mono);
+				color: var(--accent);
+				margin: 0 0 0.75em 0;
+				font-size: 0.95em;
+			}
+			.cv-header h1 {
+				margin-bottom: 0.2em;
+			}
+			.cv-role {
+				color: rgb(var(--fg-muted));
+				margin: 0 0 0.75em 0;
+			}
+			.cv-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4em 1em;
+				font-family: var(--font-mono);
+				font-size: 0.85em;
+				color: rgb(var(--fg-muted));
+				margin-bottom: 2em;
+			}
+			.cv-meta a {
+				color: rgb(var(--fg-muted));
+				text-decoration: none;
+			}
+			.cv-meta a:hover {
+				color: var(--accent);
+			}
+			section.cv-section {
+				margin-bottom: 2.5em;
+			}
+			section.cv-section h2 {
+				font-size: 1.1em;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: var(--accent);
+				border-bottom: 1px solid rgb(var(--border));
+				padding-bottom: 0.5em;
+				margin-bottom: 1em;
+			}
+			.skill-group {
+				margin-bottom: 1em;
+			}
+			.skill-group:last-child {
+				margin-bottom: 0;
+			}
+			.skill-group h3 {
+				font-size: 0.95em;
+				color: rgb(var(--fg-muted));
+				margin-bottom: 0.6em;
+				font-weight: normal;
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.tags li {
+				font-family: var(--font-mono);
+				font-size: 0.85em;
+				background: rgb(var(--bg-inset));
+				border: 1px solid rgb(var(--border));
+				border-radius: 4px;
+				padding: 0.3em 0.6em;
+				color: rgb(var(--fg));
+			}
+			.entry {
+				margin-bottom: 1.75em;
+			}
+			.entry:last-child {
+				margin-bottom: 0;
+			}
+			.entry-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 0.5em;
+				margin-bottom: 0.3em;
+			}
+			.entry-title {
+				margin: 0;
+				font-size: 1.05em;
+			}
+			.entry-org {
+				color: rgb(var(--fg-muted));
+				font-weight: normal;
+			}
+			.entry-dates {
+				font-family: var(--font-mono);
+				font-size: 0.8em;
+				color: rgb(var(--fg-muted));
+				white-space: nowrap;
+			}
+			.entry p {
+				margin: 0;
+				color: rgb(var(--fg-muted));
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="cv-header">
+				<p class="prompt">mradder@web:~$ cat about.md</p>
+				<h1>Daniel Green</h1>
+				<p class="cv-role">Aspiring IT Professional · BSc Computing &amp; IT (In Progress)</p>
+				<div class="cv-meta">
+					<span>Cambridge, UK</span>
+					<a href="#" data-eu="30neergd" data-ed="moc.liamg" data-reveal="1">dgreen03 [at] gmail.com</a>
+					<a href="https://www.linkedin.com/in/danielgreen89" target="_blank" rel="noopener noreferrer"
+						>linkedin.com/in/danielgreen89</a
+					>
+				</div>
+			</div>
+
+			<section class="cv-section">
+				<h2>Profile</h2>
+				<p>
+					Motivated and adaptable career-changing professional transitioning into the IT sector,
+					currently studying for a BSc in Computing and IT with The Open University. Building a
+					strong foundation in core computing principles, with developing interests in software
+					development and data-driven problem solving. Brings strong analytical thinking, excellent
+					problem-solving ability, and well-developed interpersonal skills, alongside practical
+					experience using technology in both professional and personal contexts. Actively seeking
+					an entry-level IT role with a commitment to continuous learning and professional
+					development.
+				</p>
+			</section>
+
+			<section class="cv-section">
+				<h2>Core Skills</h2>
+				{
+					skills.map((group) => (
+						<div class="skill-group">
+							<h3>{group.label}</h3>
+							<ul class="tags">
+								{group.items.map((item) => (
+									<li>{item}</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</section>
+
+			<section class="cv-section">
+				<h2>Education</h2>
+				<div class="entry">
+					<div class="entry-header">
+						<h3 class="entry-title">BSc (Hons) Computing and IT (In Progress) <span class="entry-org">— The Open University</span></h3>
+						<span class="entry-dates">April 2026 – April 2032 (expected)</span>
+					</div>
+					<p>
+						Developing applied knowledge across computing systems, operating systems, networking
+						fundamentals, and software development through practical coursework and assessments.
+					</p>
+				</div>
+			</section>
+
+			<section class="cv-section">
+				<h2>Technical Projects &amp; Independent Learning</h2>
+				{
+					projects.map((project) => (
+						<div class="entry">
+							<h3 class="entry-title">{project.title}</h3>
+							<p>{project.description}</p>
+						</div>
+					))
+				}
+			</section>
+
+			<section class="cv-section">
+				<h2>Experience</h2>
+				{
+					experience.map((job) => (
+						<div class="entry">
+							<div class="entry-header">
+								<h3 class="entry-title">
+									{job.role} <span class="entry-org">— {job.org}</span>
+								</h3>
+								<span class="entry-dates">{job.dates}</span>
+							</div>
+							<p>{job.description}</p>
+						</div>
+					))
+				}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
