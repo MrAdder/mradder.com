@@ -17,9 +17,42 @@ const skills = [
 		label: 'Professional Skills',
 		items: ['Customer service', 'Clear communication', 'Teamwork', 'Structured problem solving'],
 	},
+	{
+		label: 'Development & Open Source',
+		items: [
+			'PHP',
+			'Laravel',
+			'MySQL',
+			'Filament',
+			'React',
+			'TypeScript',
+			'Python / Discord.py',
+			'Git & GitHub',
+			'CI/CD (GitHub Actions)',
+			'Automated testing',
+		],
+	},
 ];
 
 const projects = [
+	{
+		title: 'Filament Logger (open source package)',
+		href: 'https://github.com/MrAdder/filament-logger',
+		description:
+			'Maintain a published Laravel/Filament package for audit logging, activity tracking, and admin-panel dashboards — 25+ GitHub stars and available on Packagist. Runs its own CI pipeline with automated tests, PHPStan static analysis, and a SonarCloud quality gate.',
+	},
+	{
+		title: 'VATSIM UK — air traffic controller & contributor',
+		href: 'https://www.vatsim.uk/',
+		description:
+			'S1-rated controller and code contributor for VATSIM UK, a live, community-run online air traffic control and flight simulation network, contributing to the controller tooling used across the organisation.',
+	},
+	{
+		title: 'mradder.com (this site)',
+		href: 'https://mradder.com',
+		description:
+			'Designed and built this site with Astro, including a GitHub Actions CI/CD pipeline (type-checking, automated Playwright tests, deploy on merge), Dependabot-managed dependency updates, SEO (structured data, sitemap, Open Graph), and hardening against automated scraping.',
+	},
 	{
 		title: 'Home Lab Environment (Windows & Linux)',
 		description:
@@ -177,6 +210,15 @@ const personSchema = {
 				margin: 0;
 				font-size: 1.05em;
 			}
+			.entry-title a {
+				color: rgb(var(--fg));
+				text-decoration: none;
+				border-bottom: 1px solid rgb(var(--border));
+			}
+			.entry-title a:hover {
+				color: var(--accent);
+				border-bottom-color: var(--accent);
+			}
 			.entry-org {
 				color: rgb(var(--fg-muted));
 				font-weight: normal;
@@ -258,7 +300,15 @@ const personSchema = {
 				{
 					projects.map((project) => (
 						<div class="entry">
-							<h3 class="entry-title">{project.title}</h3>
+							<h3 class="entry-title">
+								{project.href ? (
+									<a href={project.href} target="_blank" rel="noopener noreferrer">
+										{project.title}
+									</a>
+								) : (
+									project.title
+								)}
+							</h3>
 							<p>{project.description}</p>
 						</div>
 					))
