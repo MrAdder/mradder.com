@@ -6,20 +6,43 @@ import { SITE_TITLE } from '../consts';
 
 const skills = [
 	{
-		label: 'Technical Skills',
-		items: ['Windows', 'Linux', 'Active Directory', 'Microsoft Office 365', 'Networking / IP addressing'],
+		label: 'Operating Systems',
+		items: ['Windows client & server', 'Linux command line', 'Linux user & permission management'],
 	},
 	{
-		label: 'IT Support & Systems',
-		items: ['Ticketing systems', 'Incident handling', 'Hardware & software troubleshooting', 'End-user support'],
+		label: 'Identity & Security',
+		items: [
+			'Active Directory user & group administration',
+			'Microsoft Entra ID concepts',
+			'Microsoft 365 security & compliance fundamentals',
+		],
+	},
+	{
+		label: 'Productivity Platforms',
+		items: ['Microsoft 365 administration', 'End-user support'],
+	},
+	{
+		label: 'Networking',
+		items: ['TCP/IP', 'IP addressing & subnetting', 'DHCP & DNS basics', 'UniFi configuration & monitoring'],
+	},
+	{
+		label: 'Virtualisation',
+		items: ['Virtual machines', 'LXC containers', 'Backup & recovery testing'],
+	},
+	{
+		label: 'IT Service Management',
+		items: ['Ticketing systems', 'Incident triage', 'Escalation procedures', 'Documentation & knowledge base articles'],
 	},
 	{
 		label: 'Professional Skills',
-		items: ['Customer service', 'Clear communication', 'Teamwork', 'Structured problem solving'],
+		items: ['Customer service', 'Team leadership', 'Training & onboarding', 'Working under pressure'],
 	},
 	{
 		label: 'Development & Open Source',
 		items: [
+			'Node.js',
+			'JavaScript',
+			'Event-driven automation',
 			'PHP',
 			'Laravel',
 			'MySQL',
@@ -56,17 +79,17 @@ const projects = [
 	{
 		title: 'Home Lab Environment (Windows & Linux)',
 		description:
-			'Designed, deployed, and maintained virtualized environments using virtual machines and LXC containers. Performed system configuration, user management, troubleshooting, and recovery testing, documenting changes for repeatability.',
+			'Designed, deployed, and maintain a virtualised lab of Windows and Linux systems using virtual machines and LXC containers. Configure systems, manage user accounts and permissions, troubleshoot faults across operating systems, run recovery tests to validate backups, and document every change and fix so it can be repeated.',
 	},
 	{
 		title: 'Networking & Infrastructure',
 		description:
-			'Implemented and managed a UniFi-based home network. Configured network devices, monitored connectivity and performance, and diagnosed hardware and network-related issues using core networking principles.',
+			'Implemented and manage a UniFi-based home network, configuring switches, access points, and gateway settings. Monitor connectivity and performance, and diagnose hardware and network faults using core networking principles.',
 	},
 	{
 		title: 'Software Development & Automation',
 		description:
-			'Developed custom Discord bots using Node.js, implementing event-driven logic, command handling, and integrations. Researched and implemented solutions using official documentation and community resources.',
+			'Built custom Discord bots using Node.js, with event-driven logic, command handling, and third-party integrations. Solved implementation problems independently using official documentation and technical communities.',
 	},
 ];
 
@@ -76,17 +99,17 @@ const experience = [
 		org: 'Tesco',
 		dates: 'April 2021 – December 2025',
 		description:
-			'First point of contact for operational issues during assigned shifts, diagnosing problems and coordinating resolutions under time pressure. Provided frontline support to colleagues, responded to system and process queries, followed escalation procedures, and used internal tools for reporting, compliance, and audit requirements.',
+			'Led shifts across a store team of around 18 colleagues, acting as first point of contact for operational and system issues, diagnosing problems and coordinating fixes under time pressure. Supported colleagues with system and process queries, followed escalation procedures when issues needed specialist teams, and used internal tools for reporting, compliance, and audit, keeping records accurate and complete.',
 	},
 	{
 		role: 'Supervisor',
 		org: "McColl's Retail Group",
 		dates: 'August 2018 – November 2020',
 		description:
-			'Supported daily store operations by resolving system-related and customer issues, onboarding and training new colleagues, and ensuring consistent adherence to procedures, security standards, and data handling requirements.',
+			'Resolved system-related and customer issues to keep daily store operations running, onboarded and trained new colleagues on systems and procedures, and enforced security standards and data handling requirements across the team.',
 	},
 	{
-		role: 'Paid Global Administrator',
+		role: 'Global Administrator (Paid)',
 		org: 'Twitch',
 		dates: 'September 2013 – January 2015',
 		description:
@@ -105,8 +128,9 @@ const personSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
 	name: 'Daniel Green',
-	jobTitle: 'Aspiring IT Professional',
-	description: 'Aspiring IT Professional studying a BSc in Computing and IT with the Open University.',
+	jobTitle: 'IT Support & Systems Professional',
+	description:
+		'Microsoft-certified (SC-900) IT Support & Systems Professional studying a BSc in Computing and IT with the Open University.',
 	address: {
 		'@type': 'PostalAddress',
 		addressLocality: 'Cambridge',
@@ -119,7 +143,7 @@ const personSchema = {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`About — ${SITE_TITLE}`} description="Daniel Green — Aspiring IT Professional, CV and background." />
+		<BaseHead title={`About — ${SITE_TITLE}`} description="Daniel Green — IT Support & Systems Professional, CV and background." />
 		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
 		<style>
 			.prompt {
@@ -241,7 +265,7 @@ const personSchema = {
 			<div class="cv-header">
 				<p class="prompt">mradder@web:~$ cat about.md</p>
 				<h1>Daniel Green</h1>
-				<p class="cv-role">Aspiring IT Professional · BSc Computing &amp; IT (In Progress)</p>
+				<p class="cv-role">IT Support &amp; Systems Professional · Microsoft Certified (SC-900) · BSc Computing &amp; IT Student</p>
 				<div class="cv-meta">
 					<span>Cambridge, UK</span>
 					<a href="#" data-eu="30neergd" data-ed="moc.liamg" data-reveal="1">dgreen03 [at] gmail.com</a>
@@ -254,14 +278,18 @@ const personSchema = {
 			<section class="cv-section">
 				<h2>Profile</h2>
 				<p>
-					Motivated and adaptable career-changing professional transitioning into the IT sector,
-					currently studying for a BSc in Computing and IT with The Open University. Building a
-					strong foundation in core computing principles, with developing interests in software
-					development and data-driven problem solving. Brings strong analytical thinking, excellent
-					problem-solving ability, and well-developed interpersonal skills, alongside practical
-					experience using technology in both professional and personal contexts. Actively seeking
-					an entry-level IT role with a commitment to continuous learning and professional
-					development.
+					Microsoft-certified IT professional with hands-on technical support experience and over
+					seven years leading frontline operations in fast-paced retail environments. Holds the
+					Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900)
+					certification and is studying part-time for a BSc (Hons) in Computing and IT with The
+					Open University, achieving a Distinction in TM111.
+				</p>
+				<p>
+					Brings practical skills from building and maintaining a Windows and Linux home lab,
+					managing a UniFi network, and developing Node.js automation. Known for calm, structured
+					troubleshooting under pressure, clear communication with non-technical users, and careful
+					documentation. Since 2026, focused full-time on study and certification while seeking an
+					entry-level IT Support, Service Desk, or Junior Systems Administrator role.
 				</p>
 			</section>
 
@@ -282,6 +310,16 @@ const personSchema = {
 			</section>
 
 			<section class="cv-section">
+				<h2>Certifications</h2>
+				<div class="entry">
+					<div class="entry-header">
+						<h3 class="entry-title">Microsoft Certified: Security, Compliance, and Identity Fundamentals (SC-900) <span class="entry-org">— Microsoft</span></h3>
+						<span class="entry-dates">Issued January 2023</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="cv-section">
 				<h2>Education</h2>
 				<div class="entry">
 					<div class="entry-header">
@@ -289,8 +327,10 @@ const personSchema = {
 						<span class="entry-dates">April 2026 – April 2032 (expected)</span>
 					</div>
 					<p>
-						Developing applied knowledge across computing systems, operating systems, networking
-						fundamentals, and software development through practical coursework and assessments.
+						TM111 Introduction to Computing and Information Technology 1: Distinction. Currently
+						studying TM112 Introduction to Computing and Information Technology 2. Studying computing
+						systems, operating systems, networking fundamentals, and software development through
+						practical coursework and assessments.
 					</p>
 				</div>
 			</section>
